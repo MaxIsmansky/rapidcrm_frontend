@@ -1,15 +1,18 @@
 {
-  "name": "frontend",
-  "version": "1.0.0",
-  "description": "frontend",
-  "main": "index.html",
-  "config":{
-    "port":3000
-  },
+  "name": "front-crm",
+  "version": "0.1.0",
+  "private": true,
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start":"http-server -p $npm_package_config_port"
+    "serve": "vue-cli-service serve",
+    "build": "vue-cli-service build"
   },
-  "author": "",
-  "license": "ISC"
+  "dependencies": {
+    "core-js": "^3.8.3",
+    "vue": "^3.2.13",
+    "vue-router": "^4.0.13"
+  },
+  "devDependencies": {
+    "@vue/cli-plugin-babel": "~5.0.0",
+    "@vue/cli-service": "~5.0.0"
+  }
 }

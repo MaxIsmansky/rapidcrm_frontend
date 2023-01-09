@@ -1,9 +1,19 @@
-#How to run frontend server
+# front-crm
 
-1. You have to install:
-* node.js
-* npm
-* http-server
+## Project setup
+```
+npm install
+```
 
-2. To start local server type:
-npm start
+### Compiles and hot-reloads for development
+```
+npm run serve
+```
+
+### Compiles and minifies for production
+```
+npm run build
+```
+
+### Customize configuration
+See [Configuration Reference](https://cli.vuejs.org/config/).

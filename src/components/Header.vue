@@ -5,20 +5,24 @@
                 <img class="logo_header" src="../assets/logo.png"/>
                     <ul class="menu">
                         <li><router-link to="/">Главная</router-link></li>
-                        <li><a href="">Меню</a></li>
+                        <li><router-link to="/Menu">Меню</router-link></li>
                         <li><router-link to="/aboutUs">О нас</router-link></li> 
                         <li><router-link to="/photoGallery">Фотогалерея</router-link></li>
                     </ul> 
-                    <div class="entry"><a href="">Вход</a></div>
-                <div class="order"><a href="">Заказ</a></div>
+                    <div class="entry"><router-link to="/entrance">Вход</router-link></div>
+                <div class="order"><router-link to="/order">Заказ</router-link></div>
             </div>
          </div>
     </header>
 </template>
 
-<script scoped> 
+<script scoped>
+import router from '@/router';
+
+ 
 export default {
-    name: 'Header',
+    name: "Header",
+    components: { router }
 }
 </script>
 

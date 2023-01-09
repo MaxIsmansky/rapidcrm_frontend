@@ -8,7 +8,7 @@
             <ul class="menu_footer">
                 <li><span class="section">Разделы сайта</span></li>
                 <li><router-link to="/">Главная</router-link></li>
-                <li><a href="../Menu/Menu.html">Меню</a></li>
+                <li><router-link to="/Menu">Меню</router-link></li>
                 <li><router-link to="/aboutUs">О нас</router-link></li>
                 <li><router-link to="/photoGallery">Фотогалерея</router-link></li>
             </ul>

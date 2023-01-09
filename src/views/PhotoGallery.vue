@@ -1,66 +1,68 @@
-<!-- <template>
+<template>
 <div class="body">
-    <p><img id="largePhoto" src="../assets/Photo_PhotoGallery/photoGallery_2.png" alt="large Photo"></p>
+    <!-- <p><img id="largePhoto" src="../assets/Photo_PhotoGallery/photoGallery_2.png" alt="large Photo"></p> -->
+    <p><img id="largePhoto" :src=large.src alt="large Photo"></p>
     <div id="carousel_of_images" class="carousel_of_images">
         <button class="arrow prev">&lt;</button>
         <div class="gallery">
             <ul id="gallery">
-                <li><img src="../assets/Photo_PhotoGallery/photoGallery_1.png"></li>
+                <li :key ="el.id" v-for="el in elements">
+                    <img :src="el.src">
+                </li>
+                <!-- <li><img src="../assets/Photo_PhotoGallery/photoGallery_1.png"></li>
                 <li><img src="../assets/Photo_PhotoGallery/photoGallery_2.png"></li>
                 <li><img src="../assets/Photo_PhotoGallery/photoGallery_3.png"></li>
                 <li><img src="../assets/Photo_PhotoGallery/photoGallery_4.png"></li>
                 <li><img src="../assets/Photo_PhotoGallery/photoGallery_5.png"></li>
                 <li><img src="../assets/Photo_PhotoGallery/photoGallery_6.png"></li>
                 <li><img src="../assets/Photo_PhotoGallery/photoGallery_7.png"></li>
-                <li><img src="../assets/Photo_PhotoGallery/photoGallery_8.png"></li>
+                <li><img src="../assets/Photo_PhotoGallery/photoGallery_8.png"></li> -->
             </ul>
         </div>
         <button class="arrow next">></button>
     </div>
 </div>
-</template> -->
-
-<template>
-    <div class="body">
-        <p><img id="largePhoto" :src="large.src" alt="large Photo"></p>
-        <div id="carousel_of_images" class="carousel_of_images">
-            <button class="arrow prev">&lt;</button>
-            <div class="gallery">
-                <ul id="gallery" ref="ul">
-                    <li v-for="el in elements" :key = "el.id"><img :src="el.src"></li>
-                </ul>
-            </div>
-            <button class="arrow next" >&gt;</button>
-        </div>
-    </div>
 </template>
 
 <script>
-
 export default {
     name: 'PhotoGallery',
-    data() {
+    // props: {
+    //     elements: Array,
+    //     large: Object
+    // },
+    data () {
         return {
             elements: [],
-            large: {src: '../assets/Photo_PhotoGallery/photoGallery_2.png'}
+            large: {}
         }
     },
-    methods: {
-        
-    },
-    created() {
+    created () {
+        this.large = {
+            src: "../assets/Photo_PhotoGallery/photoGallery_2.png"
+        },
         this.elements = [
-            {src: '../assets/Photo_PhotoGallery/photoGallery_1.png'},
-            {src: '../assets/Photo_PhotoGallery/photoGallery_2.png'}, 
-            {src: '../assets/Photo_PhotoGallery/photoGallery_3.png'}, 
-            {src: '../assets/Photo_PhotoGallery/photoGallery_4.png'}, 
-            {src: '../assets/Photo_PhotoGallery/photoGallery_5.png'}, 
-            {src: '../assets/Photo_PhotoGallery/photoGallery_6.png'}, 
-            {src: '../assets/Photo_PhotoGallery/photoGallery_7.png'}, 
-            {src: '../assets/Photo_PhotoGallery/photoGallery_8.png'}
+            {
+                src: '../assets/Photo_PhotoGallery/photoGallery_1.png'
+            },
+            {
+                src: '../assets/Photo_PhotoGallery/photoGallery_2.png'
+            },
+            {
+                src: '../assets/Photo_PhotoGallery/photoGallery_3.png'
+            },
+            {
+                src: '../assets/Photo_PhotoGallery/photoGallery_4.png'
+            },
+            {
+                src: '../assets/Photo_PhotoGallery/photoGallery_5.png'
+            },
+            {
+                src: '../assets/Photo_PhotoGallery/photoGallery_6.png'
+            },
         ]
     }
-}
+} 
 </script>
 
 

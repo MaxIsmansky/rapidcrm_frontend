@@ -3,14 +3,14 @@
         <div class = header>
             <div class="selection"> 
                 <img class="logo_header" src="../assets/logo.png"/>
-                    <ul class="menu">
-                        <li><router-link to="/">Главная</router-link></li>
+                    <ul class="menu" @click="scrollToTop">
+                        <li><router-link to="/" exact>Главная</router-link></li>
                         <li><router-link to="/Menu">Меню</router-link></li>
                         <li><router-link to="/aboutUs">О нас</router-link></li> 
                         <li><router-link to="/photoGallery">Фотогалерея</router-link></li>
                     </ul> 
-                    <div class="entry"><router-link to="/entrance">Вход</router-link></div>
-                <div class="order"><router-link to="/order">Заказ</router-link></div>
+                <div class="entry"><router-link to="/entrance" @click="scrollToTop">Вход</router-link></div>
+                <div class="order"><router-link to="/order" @click="scrollToTop">Заказ</router-link></div>
             </div>
          </div>
     </header>
@@ -22,7 +22,12 @@ import router from '@/router';
  
 export default {
     name: "Header",
-    components: { router }
+    components: { router },
+    methods: {
+        scrollToTop() {
+            window.scrollTo(0,0);
+        }
+    }
 }
 </script>
 
@@ -39,15 +44,14 @@ body {
     background-position: center center;
     background-size: cover;
     text-align: center;
+    z-index: 1000;
 }
-
 .selection {
     display: inline-block;
     margin: 0 80px 0 80px;
     padding: 0;
     vertical-align: top;
 }
-
 .logo_header {
     float:left;
     width: 172px;
@@ -75,6 +79,11 @@ body {
     font-family: "Open Sans", sans-serif;
     font-weight: 600;
     color: #FFFFFF;
+}
+
+a.router-link-active,
+li.router-link-active {
+    color: #FFEBCD
 }
 
 .entry,

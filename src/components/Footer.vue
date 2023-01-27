@@ -5,7 +5,7 @@
             <img class="logo_footer" src="../assets/logo.png"/>
 
             <div class="navigation">
-            <ul class="menu_footer">
+            <ul class="menu_footer" @click="scrollToTop">
                 <li><span class="section">Разделы сайта</span></li>
                 <li><router-link to="/">Главная</router-link></li>
                 <li><router-link to="/Menu">Меню</router-link></li>
@@ -27,6 +27,17 @@
     </footer>
 </template>
 
+<script>
+export default {
+    name: 'Footer',
+    methods: {
+        scrollToTop() {
+            window.scrollTo(0,0);
+        }
+    }
+}
+</script>
+
 <style scoped>
 .body {
     margin: 0;
@@ -39,7 +50,6 @@
     background-position: center center;
     background-size: cover;
     text-align: center;
-    
 }
 .footer1{
     display: inline-block;

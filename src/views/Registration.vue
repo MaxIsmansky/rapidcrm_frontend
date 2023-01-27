@@ -14,13 +14,24 @@
                 <p class="hint">* - обязательные для заполнения поля</p>
                 <input class="register" type="submit" value="ЗАРЕГИСТРИРОВАТЬСЯ">
                 <p class="subtitle ili">ИЛИ</p>
-                <router-link to="/entrance" class="entrance">
+                <router-link to="/entrance" class="entrance" @click="scrollToTop">
                     <input class="enter" type="submit" value="Войти">
                 </router-link>
             </div>
         </div>
     </div>
 </template>
+
+<script>
+export default {
+    name: 'Registration',
+    methods: {
+        scrollToTop() {
+            window.scrollTo(0,0);
+        }
+    }
+}
+</script>
 
 <style scoped>
 .body {

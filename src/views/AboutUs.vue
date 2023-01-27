@@ -109,8 +109,8 @@
     justify-content: space-between;
     box-sizing: border-box;
     width: 100%;
-    margin-left: auto;
-    margin-right: auto;
+    max-width: 1600px;
+    margin: 0 auto;
     padding: 0 80px 125px 80px;
     text-transform: uppercase;
     font-family: 'Open Sans', sans-serif;

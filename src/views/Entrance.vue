@@ -10,13 +10,24 @@
                 <br>
                 <input class="enter" type="submit" value="ВОЙТИ">
                 <p class="subtitle ili">ИЛИ</p>
-                <router-link to="/registration" class="registration">
+                <router-link to="/registration" class="registration" @click="scrollToTop">
                     <input class="register" type="submit" value="Зарегистрироваться">
                 </router-link>
             </div>
         </div>
     </div>
 </template>
+
+<script>
+export default {
+    name: 'Entrance',
+    methods: {
+        scrollToTop() {
+            window.scrollTo(0,0);
+        }
+    }
+}
+</script>
 
 <style scoped>
 .body {

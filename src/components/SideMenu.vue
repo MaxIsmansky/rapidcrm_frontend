@@ -36,11 +36,14 @@ export default {
         },
         handleScroll () {
             let openSideMenu = document.querySelector('.positionMenu');
+            let a = window.innerHeight - (openSideMenu.offsetHeight + this.head.offsetHeight)
             // event.preventDefault()
             if(openSideMenu) {
-                // alert(this.head.getBoundingClientRect().bottom)
-                // alert(openSideMenu.getBoundingClientRect().bottom)
-                alert(this.foot.getBoundingClientRect().top)
+                if (window.innerHeight - this.foot.getBoundingClientRect().top > a) {    
+                    openSideMenu.style.position = 'relative'
+                } else {
+                    openSideMenu.style.position = 'fixed'
+                }
             }
         }
     },
@@ -62,7 +65,7 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
 /* SIDE MENU */
 .showSideMenu {
     width: 65px;
@@ -70,6 +73,8 @@ export default {
     padding-top: 35px;
     padding-left: 80px;
 }
+
+
 .sideMenu {
     float: left;
     width: 325px;
@@ -103,5 +108,48 @@ export default {
 .sideMenu ul {
     padding: 0 0 45px 0;
     margin: 0;
+}
+
+@media (max-width:1399.98px) {
+    .sideMenu {
+        width: 300px;
+    }
+    .menuSections {
+        max-width: 170px;
+        font-size: 14px;
+    }
+}
+
+@media (max-width: 899.98px) {
+    .showSideMenu {
+        width: 45px;
+        height: 45px;
+        padding-top: 25px;
+        padding-left: 50px;
+    }
+
+
+    .sideMenu {
+        width: 250px;
+        margin-right: 50px;
+    }
+    .positionMenu {
+        padding-top: 25px;
+    }
+    .hideSideMenu {
+        width: 45px;
+        height: 45px;
+        padding-left: 50px;
+    }
+    .menuSections {
+        margin-top: 5px;
+        margin-left: 50px;
+        max-width: 110px;
+        font-size: 12px;
+        font-weight: 400;
+    }
+    .sideMenu ul {
+        padding: 0 0 25px 0;
+    }
 }
 </style>

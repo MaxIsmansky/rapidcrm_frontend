@@ -192,6 +192,10 @@ export default {
     border-radius: 24px 24px 0 0;
     background-color: #FFEBCD; 
 }
+.photo{
+    max-width: 271px;
+    max-height: 270px;
+}
 .description {
     display: flex;
     align-items: center;
@@ -283,5 +287,70 @@ export default {
     background-color: #615B4B;
     width: 32px;
     height: 32px;
+}
+
+
+@media (max-width:1399.98px) {
+    .body {
+        padding-top: 79px;
+    }
+}
+
+@media (max-width: 899.98px) {
+    .body {
+        padding-top: 50px;
+    }
+/* CARDS */
+    .listOfCard {
+        margin: 0 60px 0px 80px;
+        padding: 25px 0 0 0;
+    }
+
+    .card {
+        margin-bottom: 10px;
+        margin-right: 10px;
+    }
+/* PHOTO */
+    .photoOfDish {
+        width: 250px;
+        height: 235px;
+    }
+    .photo{
+    max-width: 213px;
+    max-height: 199px;
+}
+    .description { 
+        width: 220px;
+        height: 220px;
+        padding: 15px 15px 0 15px;
+    }
+    .description_text {
+        font-size: 16px;
+    }
+/* TITLE / PRICE */
+    .nameOfDish {
+        width: 250px;
+        height: 100px;
+    }
+
+    .title,
+    .price {
+        margin: 0 22px 0 10px;
+        font-size: 16px;
+    }
+    .title {
+        top: 10px;
+    }
+    .price {
+        bottom: 10px;
+    }
+
+    .shoppingCart {
+        top: 50px;
+        left: 168px;
+        padding: 7px 22px 6px 22px;
+        width: 25px;
+        height: 25x;
+    }
 }
 </style>

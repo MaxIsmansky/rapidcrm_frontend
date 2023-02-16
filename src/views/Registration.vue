@@ -8,7 +8,7 @@
                 <p class="subtitle">Email*:</p>
                 <input class="fill" type='text' size="25" maxlength="30" value="">
                 <p class="subtitle">Номер телефона:</p>
-                <input class="fill" type='text' size="25" maxlength="30" value="">
+                <input class="fill" type='tel' size="25" maxlength="30" value="">
                 <p class="subtitle">Пароль*:</p>
                 <input class="fill password" type="password" size="25" maxlength="30" value="" >
                 <p class="hint">* - обязательные для заполнения поля</p>

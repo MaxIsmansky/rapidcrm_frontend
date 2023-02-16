@@ -4,7 +4,7 @@
             <div class="entrance">
                 <p class="title">Вход</p>
                 <p class="subtitle">Имя:</p>
-                <input class="fill" type='text' size="25" maxlength="30" value="">
+                <input class="fill" type="text" size="25" maxlength="30" value="">
                 <p class="subtitle">Пароль</p>
                 <input class="fill" type="password" size="25" maxlength="30" value="" >
                 <br>

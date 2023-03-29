@@ -79,7 +79,7 @@ export default {
             {
                 id: '3',
                 src: 'Photo_Menu/honeyCookies.png',
-                title: 'Печенье имбирное домашнее',
+                title: 'Печенье мягкое с медом',
                 price: '300 руб',
                 description: ``
             },

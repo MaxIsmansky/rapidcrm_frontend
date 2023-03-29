@@ -7,8 +7,13 @@
             <div class="sideMenu" id='sideMenu' v-else key="hideMeu">
                 <div class="positionMenu">
                     <img class="hideSideMenu" id="hideSideMenu" @click="show = !show" src="../assets/Photo_Menu/hideSideMenu.png">
-                    <ul v-if="show">
-                        <li class="menuSections" v-for="el in sideMenu">{{ el }}</li>
+                    <ul v-if="show" class="menuSections">
+                        <li class="menuSectionItem" v-for="el in sideMenu">
+                            <p>{{ el.section }}</p>
+                            <ul>
+                                <li class="menuSubsection" v-for="sub in el.subsection">{{ sub }}</li>
+                            </ul>
+                        </li>
                     </ul>
                 </div>
             </div>          
@@ -50,13 +55,16 @@ export default {
     created () {
         window.addEventListener('scroll', this.handleScroll);
         this.sideMenu = [
-            'Салаты', 
-            'Супы', 
-            'Горячие блюда', 
-            'Десерты', 
-            'Горячие напитки', 
-            'Прохладительные напитки', 
-            'Алкогольные напитки'
+            {section: 'Салаты',},
+            {section: 'Супы'},
+            {section: 'Горячие блюда'},
+            {section: 'Десерты'},
+            {section: 'Напитки',
+             subsection: [
+                'Горячие напитки',
+                'Прохладительные напитки',
+                'Алкогольные напитки'
+             ]},
         ]
     },
     destroyed () {
@@ -68,8 +76,8 @@ export default {
 <style scoped>
 /* SIDE MENU */
 .showSideMenu {
-    width: 65px;
-    height: 65px;
+    width: 55px;
+    height: 55px;
     padding-top: 35px;
     padding-left: 80px;
 }
@@ -90,11 +98,17 @@ export default {
     background-color: #D3D3D3;
 }
 .hideSideMenu {
-    width: 65px;
-    height: 65px;
+    width: 55px;
+    height: 55px;
     padding-left: 80px;
 }
+
+/* MENU SECTIONS */
 .menuSections {
+    margin: 0;
+    padding: 0 0 45px 0;
+}
+.menuSectionItem {
     list-style: none;
     margin-top: 15px;
     margin-left: 80px;
@@ -105,18 +119,37 @@ export default {
     line-height: 158%;
     color: #333232;
 }
-.sideMenu ul {
-    padding: 0 0 45px 0;
+.menuSectionItem p{
+    width: 200px;
     margin: 0;
 }
+.menuSectionItem ul {
+    padding: 0;
+}
+.menuSubsection {
+    width: 190px;
+    list-style: none;
+    margin-top: 10px;
+    margin-left: 25px;
+    font-family: 'Open Sans', sans-serif;
+    font-size: 16px;
+    font-weight: 600;
+    line-height: 158%;
+    color: #333232;
+}
+
 
 @media (max-width:1399.98px) {
     .sideMenu {
         width: 300px;
     }
-    .menuSections {
+    .menuSectionItem  {
         max-width: 170px;
         font-size: 14px;
+    }
+    .menuSubsection {
+        max-width: 150px;
+        font-size: 12px;
     }
 }
 
@@ -127,8 +160,6 @@ export default {
         padding-top: 25px;
         padding-left: 50px;
     }
-
-
     .sideMenu {
         width: 250px;
         margin-right: 50px;
@@ -141,14 +172,21 @@ export default {
         height: 45px;
         padding-left: 50px;
     }
-    .menuSections {
+    .menuSectionItem  {
         margin-top: 5px;
         margin-left: 50px;
         max-width: 110px;
         font-size: 12px;
         font-weight: 400;
     }
-    .sideMenu ul {
+    .menuSubsection {
+        width: 100px;
+        margin-top: 5px;
+        margin-left: 10px;
+        font-size: 10px;
+        font-weight: 400;
+    }
+    .menuSections {
         padding: 0 0 25px 0;
     }
 }

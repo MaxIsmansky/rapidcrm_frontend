@@ -1,23 +1,25 @@
 <template>
     <div class="registration_body">
-        <div class="registration-background">
-            <div class="registration">
+        <div class="registration-location">
+            <div class="registration-background">
                 <p class="registration_title">Регистрация</p>
-                <p class="registration_subtitle name">Имя*:</p>
-                <input class="registration_fill" id="name" type='text' size="25" maxlength="30" value="">
-                <p class="registration_subtitle">Фамилия*:</p>
-                <input class="registration_fill" id="surname" type='text' size="25" maxlength="30" value="">
-                <p class="registration_subtitle">Email*:</p>
-                <input class="registration_fill" id="email" type='text' size="25" maxlength="30" value="">
-                <p class="registration_subtitle">Номер телефона*:</p>
-                <input class="registration_fill" id="phoneNumber" type='tel' size="25" maxlength="30" value="">
-                <p class="registration_subtitle">Пароль*:</p>
-                <input class="registration_fill password" id="password" type="password" size="25" maxlength="30" value="" >
-                <p class="registration_hint">* - обязательные для заполнения поля</p>
-                <input class="registration_register" id="register" type="submit" value="ЗАРЕГИСТРИРОВАТЬСЯ" @click="newUserRegistration()">
+                <form @submit="newUserRegistration" method="post">
+                    <p class="registration_subtitle name">Имя*:</p>
+                    <input class="registration_fill" id="firstName" type='text' size="25" maxlength="30" v-model="registration.firstName">
+                    <p class="registration_subtitle">Фамилия*:</p>
+                    <input class="registration_fill" id="lastName" type='text' size="25" maxlength="30" v-model="registration.lastName">
+                    <p class="registration_subtitle">Email*:</p>
+                    <input class="registration_fill" id="email" type='text' size="25" maxlength="30" v-model="registration.email">
+                    <p class="registration_subtitle">Номер телефона*:</p>
+                    <input class="registration_fill" id="phone" type='tel' size="25" maxlength="30" v-model="registration.phone">
+                    <p class="registration_subtitle">Пароль*:</p>
+                    <input class="registration_fill password" id="password" type="password" size="25" maxlength="30" v-model="registration.password" >
+                    <p class="registration_hint">* - обязательные для заполнения поля</p>
+                    <button  class="registration_register" id="register" type="submit">ЗАРЕГИСТРИРОВАТЬСЯ</button>
+                </form>
                 <p class="registration_subtitle ili">ИЛИ</p>
                 <router-link to="/entrance" class="registration_entrance" @click="scrollToTop">
-                    <input class="registration_enter" type="submit" value="Войти">
+                    <button class="registration_enter" type="submit">Войти</button>
                 </router-link>
             </div>
         </div>
@@ -27,58 +29,45 @@
 <script>
 export default {
     name: 'Registration',
-    data() {
+    data () {
         return {
-            requestURL: 'http://192.168.31.74:8082/api/users/save',
-            xhr: new XMLHttpRequest(),
+            registration: {
+                firstName: null,
+                lastName: null,
+                email: null, 
+                phone: null,
+                password: null,
+                role: 'ROLE_USER'
+            }
         }
     },
     methods: {
         scrollToTop() {
             window.scrollTo(0,0);
         },
+        newUserRegistration (e) {
+            let userName = document.getElementById('firstName').value;
+            let userSurname = document.getElementById('lastName').value;
 
-        sendRequest (method, url, body = null) {
-            return new Promise((resolve, reject) => {
-                this.xhr.open(method, url)
-                this.xhr.responseType='json'
-                this.xhr.setRequestHeader('Content-Type', 'application/json')
-                this.xhr.onload = () => {
-                    if(this.xhr.status>=400) {
-                        reject(this.xhr.response)
-                    } else {
-                        resolve(this.xhr.response)
-                    }
-                }
-                this.xhr.onerror = () => {
-                    reject(this.xhr.response)
-                }
-                this.xhr.send(JSON.stringify(body))
-            })
-        },
-        newUserRegistration () {
-            let userName = document.getElementById('name').value;
-            let userSurname = document.getElementById('surname').value;
-
-            let userEmail = document.getElementById('email').value;
-            if (!userEmail.match('^\\w+@[a-zA-Z]+?\.[a-zA-Z]{2,3}$')) {
+            let userMail = document.getElementById('email').value;
+            if (!userMail .match('^\\w+@[a-zA-Z]+?\.[a-zA-Z]{2,3}$')) {
                 let invalidMail = document.createElement('p');
                 invalidMail.innerHTML = 'Введите, пожалуйста, корректный адрес почты';
                 invalidMail.className = 'registration_invalidInput';
                 document.getElementById('email').after(invalidMail);
-                userEmail = '';
+                userMail = '';
                 document.getElementById('email').value = '';
                 setTimeout(() => invalidMail.remove(), 2000);
             }
 
-            let userPhone = document.getElementById('phoneNumber').value;
-            if (!userPhone.match('^8\\d{10}')) {
+            let userPhone = document.getElementById('phone').value;
+            if (!userPhone.match('^8\\d{10}$')) {
                 let invalidNumber = document.createElement('p');
                 invalidNumber.innerHTML = 'Напишите, пожалуйста, свой номер телефона, начиная с 8';
                 invalidNumber.className = 'registration_invalidInput';
-                document.getElementById('phoneNumber').after(invalidNumber);
+                document.getElementById('phone').after(invalidNumber);
                 userPhone = '';
-                document.getElementById('phoneNumber').value = '';
+                document.getElementById('phone').value = '';
                 setTimeout(() => invalidNumber.remove(), 2000);
             }
 
@@ -93,20 +82,13 @@ export default {
                 setTimeout(() => invalidPassword.remove(), 2000);
             }
 
-            if (userName!='' && userSurname!='' && userEmail!='' && userPhone!='' && userPassword!='') {
-                this.sendRequest('POST', this.requestURL, {
-                    firstName: userName,
-                    lastName: userSurname,
-                    email: userEmail,
-                    phone: userPhone,
-                    password: userPassword,
-                    role: 'ROLE_USER'
-                })
+            if (userName!='' && userSurname!='' && userMail!='' && userPhone!='' && userPassword!='') {
+                this.axios.post('http://192.168.31.74:8082/api/users/save', this.registration)
                     .then(() => {
-                        document.getElementById('name').value = '';
-                        document.getElementById('surname').value = '';
+                        document.getElementById('firstName').value = '';
+                        document.getElementById('lastName').value = '';
                         document.getElementById('email').value = '';
-                        document.getElementById('phoneNumber').value = '';
+                        document.getElementById('phone').value = '';
                         document.getElementById('password').value = '';
 
                         let registrationSuccessful = document.createElement('p');
@@ -125,9 +107,42 @@ export default {
                 register.after(emptyInput);
                 setTimeout(() => emptyInput.remove(), 3000);
             }
+            e.preventDefault();
         }
     }
 }
+
+        // sendRequest (method, url, body = null) {
+        //     return new Promise((resolve, reject) => {
+        //         this.xhr.open(method, url)
+        //         this.xhr.responseType='json'
+        //         this.xhr.setRequestHeader('Content-Type', 'application/json')
+        //         this.xhr.onload = () => {
+        //             if(this.xhr.status>=400) {
+        //                 reject(this.xhr.response)
+        //             } else {
+        //                 resolve(this.xhr.response)
+        //             }
+        //         }
+        //         this.xhr.onerror = () => {
+        //             reject(this.xhr.response)
+        //         }
+        //         this.xhr.send(JSON.stringify(body))
+        //     })
+        // },
+        // newUserRegistration () {
+        //     if (userName!='' && userSurname!='' && userEmail!='' && userPhone!='' && userPassword!='') {
+        //         this.sendRequest('POST', this.requestURL, {
+        //             firstName: userName,
+        //             lastName: userSurname,
+        //             email: userEmail,
+        //             phone: userPhone,
+        //             password: userPassword,
+        //             role: 'ROLE_USER'
+        //         })
+        //     }
+        // }
+        
 </script>
 
 <style>
@@ -138,12 +153,12 @@ export default {
     padding-right: 0;
     background-color: #333232;
 }
-.registration-background {
+.registration-location {
     margin: auto;
     padding-bottom: 123px;
     width: 414px;
 }
-.registration {
+.registration-background {
     margin-left: auto;
     margin-right: auto;
     padding: 15px 35px 35px 35px;
@@ -226,7 +241,7 @@ export default {
 .registration_register {
     display: block;
     margin: 35px auto 10px auto;
-    padding: 10px;
+    padding: 10px 14px;
     border: 0;
     border-radius: 16px;
     background-color:#948167;

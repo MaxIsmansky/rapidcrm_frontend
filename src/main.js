@@ -2,6 +2,11 @@ import { createApp } from 'vue'
 import App from './App.vue'
 import router from './router'
 
-createApp(App).use(router).mount('#app')
+import axios from 'axios'
+import VueAxios from 'vue-axios'
 
-// createApp(App).mount('#app')
+let app = createApp(App).use(router)
+
+app.use(VueAxios, axios)
+app.provide('axios', app.config.globalProperties.axios) 
+app.mount('#app')

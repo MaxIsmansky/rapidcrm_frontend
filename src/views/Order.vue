@@ -1,7 +1,7 @@
 <template>
     <div class="body">
-        <div class="registration-background">
-            <div class="registration">
+        <div class="orders-background">
+            <div class="orders">
                 <p class="title">Оформление заказа</p>
                 <p class="subtitle">Имя*:</p>
                 <input class="fill" type="text" size="25" maxlength="30" value="">
@@ -118,12 +118,12 @@ export default {
     padding-right: 0;
     background-color: #333232;
 }
-.registration-background {
+.orders-background {
+    width: 630px;
     margin: auto;
     padding-bottom: 123px;
-    width: 630px;
 }
-.registration {
+.orders {
     margin-left: auto;
     margin-right: auto;
     padding: 15px 88px 45px 88px;
